@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alvin Adiraharja Marcelino Gunawan — GIS Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1A18;
+    --accent: #C4532A;
+    --accent-light: #E8937A;
+    --muted: #6B6860;
+    --border: #D8D3C8;
+    --card-bg: #FDFAF4;
+    --tag-bg: #EDE8DF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: -1px; bottom: 0;
+    width: 60px;
+    background: var(--cream);
+    clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent-light);
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .hero-name span { color: var(--accent-light); }
+
+  .hero-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: #B0ADA7;
+    max-width: 340px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s;
+    width: fit-content;
+  }
+  .hero-cta:hover { background: var(--accent-light); }
+  .hero-cta svg { width: 14px; height: 14px; }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 60px 80px 100px;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .hero-photo-wrap {
+    position: relative;
+    width: 260px;
+    flex-shrink: 0;
+  }
+
+  .hero-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 1.5px solid var(--accent);
+    border-radius: 4px;
+    z-index: 0;
+    transform: rotate(3deg);
+  }
+
+  .hero-photo {
+    width: 260px;
+    height: 320px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    display: block;
+    background: var(--border);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 260px;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 100px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+
+  /* ── ABOUT / DEFINITION ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-img-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .about-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--border);
+  }
+
+  .about-img:first-child { margin-top: 40px; }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--tag-bg);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .pill::before {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-divider {
+    background: var(--dark);
+    padding: 100px 80px;
+  }
+
+  .projects-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .projects-divider .section-tag { color: var(--accent-light); }
+  .projects-divider .section-tag::before { background: var(--accent-light); }
+  .projects-divider .section-title { color: #fff; }
+  .projects-divider .section-body { color: #8A8880; }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 0;
+    border-bottom: 1px solid #2E2E2B;
+    cursor: default;
+    transition: padding-left 0.25s ease;
+  }
+  .project-item:hover { padding-left: 12px; }
+  .project-item:first-child { border-top: 1px solid #2E2E2B; }
+
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent-light);
+    opacity: 0.6;
+  }
+
+  .project-info { flex: 1; }
+
+  .project-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: #8A8880;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .project-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid #3A3A37;
+    color: #8A8880;
+    border-radius: 2px;
+  }
+
+  /* ── MAP VISUALS ── */
+  .maps-section {
+    padding: 100px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .maps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .map-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .map-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+
+  .map-card-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    background: var(--tag-bg);
+    display: block;
+  }
+
+  /* Geological maps are landscape — use wider ratio */
+  .map-card-img.geo-img {
+    aspect-ratio: 16/10;
+    object-fit: contain;
+    background: var(--tag-bg);
+    padding: 8px;
+  }
+
+  .map-card-body {
+    padding: 16px 18px;
+  }
+
+  .map-card-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .map-card-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 80px;
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .contact-icon svg { width: 16px; height: 16px; stroke: #fff; fill: none; }
+
+  .contact-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .contact-value {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--dark);
+  }
+
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cta-block {
+    background: var(--dark);
+    border-radius: 8px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cta-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .cta-block p {
+    font-size: 14px;
+    font-weight: 300;
+    color: #8A8880;
+    line-height: 1.7;
+  }
+
+  .cta-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    width: fit-content;
+    transition: background 0.2s;
+  }
+  .cta-email:hover { background: var(--accent-light); }
+
+  footer {
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left::after { display: none; }
+    .hero-left { padding: 60px 32px; }
+    .hero-right { padding: 48px 32px; }
+    .hero-photo-wrap, .hero-photo, .hero-stats { width: 100%; }
+    .section { padding: 64px 32px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .projects-divider { padding: 64px 32px; }
+    .maps-grid { grid-template-columns: 1fr 1fr; }    .contact-section { padding: 64px 32px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .project-item { grid-template-columns: 1fr; gap: 12px; }
+    .project-tags { justify-content: flex-start; }
+    .maps-section { padding: 64px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">GIS Specialist &amp; Geologist</div>
+    <h1 class="hero-name">
+      Alvin<br>
+      Adiraharja<br>
+      <span>Marcelino</span><br>
+      Gunawan
+    </h1>
+    <p class="hero-desc">
+      Spatial intelligence meets geological expertise. I build maps, analyze hazard risks, and turn complex geographic data into decisions.
+    </p>
+    <a href="#contact" class="hero-cta">
+      Work with me
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <!-- Graduation photo placeholder (image not extractable from PDF) -->
+      <img src="Pass Photo 2025-Compressed.jpg" class="hero-photo" alt="Alvin Adiraharja Marcelino Gunawan">
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-num">GIS</span>
+        <span class="stat-label">Technology</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">AHP</span>
+        <span class="stat-label">Method</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Map Types</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">GEO</span>
+        <span class="stat-label">Field Work</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT IS GIS ── -->
+<section class="section">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag">Definition</div>
+      <h2 class="section-title">Geographic Information System</h2>
+      <div class="pill">Computer-based spatial technology</div>
+      <p class="section-body">
+        GIS is a computer-based technology used to perform geographic analysis. It consists of various components that allow users to input, store, analyze, and generate spatial data — turning raw geography into actionable insight.
+      </p>
+      <p style="font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;">
+        From geological survey to multi-hazard risk mapping, GIS enables specialists to layer complex spatial datasets and derive conclusions that would be impossible with conventional cartography alone.
+      </p>
+    </div>
+    <div class="about-img-pair">
+      <img src="IMG_1283.JPG" class="about-img">
+      <img src="IMG_1446.JPG" class="about-img">
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<div class="projects-divider">
+  <div class="projects-inner">
+    <div class="section-tag">Expertise</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:12px;">Areas of Application</h2>
+    <p class="section-body">Key domains where GIS analysis delivers measurable impact.</p>
+
+    <div class="project-list">
+      <div class="project-item">
+        <span class="project-num">01</span>
+        <div class="project-info">
+          <div class="project-name">Geological Mapping</div>
+          <p class="project-desc">Creation of Framework Maps, Geomorphology Maps, and Geological Maps for field geological surveys. GIS is the backbone of modern geological documentation.</p>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Framework Map</span>
+          <span class="project-tag">Geomorphology</span>
+          <span class="project-tag">Geology</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">02</span>
+        <div class="project-info">
+          <div class="project-name">Multi-Hazard Assessment</div>
+          <p class="project-desc">Building comprehensive hazard maps by combining GIS spatial analysis with multi-criteria methods such as AHP (Analytic Hierarchy Process) to model and communicate disaster risk.</p>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Hazard Mapping</span>
+          <span class="project-tag">AHP Method</span>
+          <span class="project-tag">Risk Analysis</span>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">03</span>
+        <div class="project-info">
+          <div class="project-name">Spatial Data Integration</div>
+          <p class="project-desc">Merging diverse data sources — topographic, hydrological, land use — into coherent spatial layers that support evidence-based planning and decision-making.</p>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Data Fusion</span>
+          <span class="project-tag">Spatial Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAP GALLERY ── -->
+<section class="maps-section">
+  <div class="section-tag">Portfolio</div>
+  <h2 class="section-title">Map Gallery</h2>
+  <p class="section-body">A selection of hazard and geological maps produced using GIS methodologies.</p>
+
+  <div class="maps-grid">
+    <div class="map-card">
+      <img src="Bahaya Banjir.jpg" class="map-card-img" alt="Flood Hazard Index">
+      <div class="map-card-body">
+        <div class="map-card-title">Flood Hazard Index</div>
+        <div class="map-card-sub">Flood stability analysis · Regional scale</div>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <img src="Bahaya Longsor.jpg" class="map-card-img" alt="Landslide Risk Zones">
+      <div class="map-card-body">
+        <div class="map-card-title">Landslide Risk Zones</div>
+        <div class="map-card-sub">Landslide stability analysis · Regional scale</div>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <img src="Multi Hazard.jpg" class="map-card-img" alt="Combined Multi-Hazard">
+      <div class="map-card-body">
+        <div class="map-card-title">Combined Multi-Hazard</div>
+        <div class="map-card-sub">Composite risk overlay · Regional scale · Disaster planning</div>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <img src="Peta Geologi.jpg" class="map-card-img geo-img" alt="Geological Map">
+      <div class="map-card-body">
+        <div class="map-card-title">Geological Map</div>
+        <div class="map-card-sub">Geological Map · Field mapping</div>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <img src="Peta Kerangka.jpg" class="map-card-img geo-img" alt="Geological Framework Map">
+      <div class="map-card-body">
+        <div class="map-card-title">Geological Framework Map</div>
+        <div class="map-card-sub">Geological Framework Map · Field mapping · Lithological Mapping</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title" style="margin-bottom:32px;">Let's Work Together</h2>
+
+      <div class="contact-field">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Address</div>
+          <div class="contact-value">Perum Alinda Kencana Blok E1 No.09,<br>Kaliabang Tengah, Bekasi Utara, Kota Bekasi</div>
+        </div>
+      </div>
+
+      <div class="contact-field">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">(+62) 857-1507-1673</div>
+        </div>
+      </div>
+
+      <div class="contact-field" style="border-bottom:none;">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:alvin.adiraharja00@gmail.com">alvin.adiraharja00@gmail.com</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div class="cta-block">
+        <h3>Ready to map something great?</h3>
+        <p>Whether it's geological fieldwork, hazard assessment, or spatial data analysis — reach out and let's discuss how GIS can power your next project.</p>
+        <a href="mailto:alvin.adiraharja00@gmail.com" class="cta-email">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
